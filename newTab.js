@@ -11,6 +11,92 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetYesButton = document.getElementById("reset-yes");
   const resetNoButton = document.getElementById("reset-no");
 
+  // === SPEECH BUBBLE FUNCTIONALITY ===
+
+  const encouragementMessages = [
+    "Great job!",
+    "You're making progress!",
+    "Keep going!",
+    "Another one done!",
+    "Way to go!",
+    "You're on fire!",
+    "Nara is proud of you!"
+  ];
+
+  function showEncouragement() {
+    const bubble = document.getElementById('speech-bubble');
+    if (!bubble) return; // Safety check
+  
+    const message =
+      encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
+    bubble.textContent = message;
+    bubble.classList.remove("hidden");
+  
+    setTimeout(() => {
+      bubble.classList.add("hidden");
+    }, 2500);
+  }
+
+  // === GRATITUDE LOG FUNCTIONALITY ===
+
+  // Save today's gratitude
+  document.getElementById("save-gratitude").addEventListener("click", () => {
+    const entry = document.getElementById("gratitude-input").value.trim();
+    if (!entry) return;
+
+    const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+    chrome.storage.local.get(["gratitudeLog"], (result) => {
+      const log = result.gratitudeLog || {};
+      log[today] = entry;
+
+      chrome.storage.local.set({ gratitudeLog: log }, () => {
+        alert("Gratitude saved!");
+        chrome.storage.local.get(["gratitudeLog"], console.log);
+        document.getElementById("gratitude-input").value = "";
+      });
+    }); 
+  });
+
+  // View saved gratitude log
+  document.getElementById("view-gratitude-log").addEventListener("click", () => {
+    chrome.storage.local.get(["gratitudeLog"], (result) => {
+      console.log("Loaded log:", result); // Debug line
+      const log = result.gratitudeLog || {};
+      const logContainer = document.getElementById("gratitude-log-list");
+      logContainer.innerHTML = "";
+
+      const sortedEntries = Object.entries(log).sort((a, b) => new Date(b[0]) - new Date(a[0]));
+
+      if (sortedEntries.length === 0) {
+        logContainer.innerHTML = "<p>No entries yet. Start by adding one!</p>";
+      } else {
+        sortedEntries.forEach(([date, entry]) => {
+          const item = document.createElement("div");
+          item.innerHTML = `<strong>${date}</strong><br>${entry}<hr>`;
+          item.style.marginBottom = "12px";
+          logContainer.appendChild(item);
+        });
+      }
+
+      changeBackgroundWithSlide("assets/F5.png").then(() => {
+        document.getElementById("gratitude-log-container").classList.remove("hidden");
+        document.getElementById("tasks-container").classList.add("hidden");
+        document.getElementById("categories-container").classList.add("hidden");
+        document.getElementById("welcome-message").classList.add("hidden");
+        hideHoverCircles();
+      });
+    });
+  });
+
+  // Go back from log to main screen
+  document.getElementById("gratitude-log-back").addEventListener("click", () => {
+    document.getElementById("gratitude-log-container").classList.add("hidden");
+    document.getElementById("categories-container").classList.remove("hidden");
+    document.getElementById("welcome-message").classList.remove("hidden");
+    changeBackgroundWithSlide("assets/original.jpg");
+    showHoverCircles();
+  });
+
   // for controlling when hovers are active
   let hoverListeners = [];
 
@@ -673,6 +759,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tasks[originalIndex].completed) {
           const deleteButton = taskItem.querySelector(".delete-task");
           if (deleteButton) deleteButton.remove();
+          showEncouragement();
         }
 
         let newPosition = 0;

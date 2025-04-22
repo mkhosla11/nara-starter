@@ -73,6 +73,65 @@ body {
     animation: welcomeFadeIn 1s ease-out forwards;
 }
 
+#speech-bubble {
+    position: absolute;
+    top: 63%;
+    left: 63%;
+    transform: translate(-50%, -50%);
+    background-color: #fffbe6;
+    border: 2px solid #a3c9a8;
+    padding: 10px 16px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+  }
+  
+.hidden {
+    display: none;
+  }
+
+#gratitude-container {
+    color: black;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    font-family: 'Slackside One', sans-serif;
+    font-style: italic;
+    margin-top: 20px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+  }
+  
+#gratitude-log-container {
+    position: fixed;
+    top: 120px;
+    left: 180px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 24px 24px 35px 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 400px;
+    /* Set a minimum width */
+    max-width: 400px;
+    /* Set a maximum width to prevent expansion */
+  }
+
+  
+#gratitude-log-list {
+    background: #fdfdfd;
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
 /* Categories container */
 #categories-container {
     position: fixed;
