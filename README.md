@@ -56,6 +56,17 @@ git pull
 
 6. Resolve merge conflicts as needed and ensure smooth integration.
 
+## Features Implemented
+
+### 1. Daily Gratitude Input
+Users can write and save one thing they’re grateful for each day through a clean, accessible input area. Each entry is stored with a timestamp in `chrome.storage.local`, encouraging consistent reflection and positivity. If a user inputs two things in one day the first is overwritten.
+
+Clicking the “View Gratitude Log” button transitions the user to a dedicated gratitude log screen with a new background. Entries are grouped by date and dynamically displayed from storage, allowing users to revisit their moments of gratitude anytime. A “Back” button returns users to the main UI seamlessly.
+
+### 3. Speech Bubble Encouragement
+Each time a task is checked off, a speech bubble appears near the deer character with a random motivational message (e.g., “Great job!”, “You’re making progress!”). This adds a playful, rewarding touch to task completion and reinforces positive behavior.
+
+
 ## Submission
 - Submit the final version of your project as per course guidelines.
 - Include a brief write-up of your implemented features and any challenges faced.
