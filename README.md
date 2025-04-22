@@ -63,7 +63,7 @@ Users can write and save one thing they’re grateful for each day through a cle
 
 Clicking the “View Gratitude Log” button transitions the user to a dedicated gratitude log screen with a new background. Entries are grouped by date and dynamically displayed from storage, allowing users to revisit their moments of gratitude anytime. A “Back” button returns users to the main UI seamlessly.
 
-### 3. Speech Bubble Encouragement
+### 2. Speech Bubble Encouragement
 Each time a task is checked off, a speech bubble appears near the deer character with a random motivational message (e.g., “Great job!”, “You’re making progress!”). This adds a playful, rewarding touch to task completion and reinforces positive behavior.
 
 
